@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmc6313fnra0l"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_ymrdt"]
+[ext_resource type="PackedScene" uid="uid://mg6ae8bd7i2d" path="res://scenes/components/health_controller.tscn" id="2_4jnrk"]
+[ext_resource type="Texture2D" uid="uid://bvv5uv0p17g6p" path="res://resources/graphics/player/player.png" id="3_o68u0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkw8s"]
+size = Vector2(79, 228)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_ymrdt")
+walk_speed = 300.0
+run_speed = 450.0
+jump_height = 125.0
+jump_time_to_peak = 0.3
+jump_time_to_descent = 0.3
+
+[node name="HealthController" parent="." instance=ExtResource("2_4jnrk")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-10.5, 45)
+shape = SubResource("RectangleShape2D_qkw8s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(10, 10)
+texture = ExtResource("3_o68u0")
+
+[connection signal="dead" from="HealthController" to="." method="_on_health_controller_dead"]

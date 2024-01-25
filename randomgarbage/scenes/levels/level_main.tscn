@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqm3kuxak4lcl"]
+
+[ext_resource type="PackedScene" uid="uid://bmc6313fnra0l" path="res://scenes/player/player.tscn" id="1_iailm"]
+[ext_resource type="Texture2D" uid="uid://cvbbr04o7q7yg" path="res://resources/graphics/objects/block.png" id="1_okokt"]
+[ext_resource type="Script" path="res://scenes/levels/level_main.gd" id="1_r6mjv"]
+[ext_resource type="PackedScene" uid="uid://b35tkofskuehe" path="res://scenes/objects/spike.tscn" id="2_sveg4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qv35g"]
+texture = ExtResource("1_okokt")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_1a3lt"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 2
+sources/1 = SubResource("TileSetAtlasSource_qv35g")
+
+[node name="LevelMain" type="Node2D"]
+script = ExtResource("1_r6mjv")
+
+[node name="GroundObjects" type="Node" parent="."]
+
+[node name="Spike" parent="GroundObjects" instance=ExtResource("2_sveg4")]
+position = Vector2(215, 81)
+scale = Vector2(3, 3)
+kb_vector = Vector2(400, -1500)
+
+[node name="TileMap" type="TileMap" parent="GroundObjects"]
+tile_set = SubResource("TileSet_1a3lt")
+format = 2
+layer_0/tile_data = PackedInt32Array(327672, 1, 0, 327673, 1, 0, 327674, 1, 0, 327675, 1, 0, 327676, 1, 0, 327677, 1, 0, 327678, 1, 0, 327679, 1, 0, 262144, 1, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 1, 0, 393208, 1, 0, 393209, 1, 0, 393210, 1, 0, 393211, 1, 0, 393212, 1, 0, 393213, 1, 0, 393214, 1, 0, 393215, 1, 0, 327680, 1, 0, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 1, 0, 327688, 1, 0, 393224, 1, 0, 393223, 1, 0, 393222, 1, 0, 393221, 1, 0, 393220, 1, 0, 393219, 1, 0, 393218, 1, 0, 393217, 1, 0, 393216, 1, 0, 458751, 1, 0, 458750, 1, 0, 458749, 1, 0, 458748, 1, 0, 458747, 1, 0, 458746, 1, 0, 458745, 1, 0, 458744, 1, 0, 327671, 1, 0, 327670, 1, 0, 327669, 1, 0, 393205, 1, 0, 458741, 1, 0, 458742, 1, 0, 458743, 1, 0, 393207, 1, 0, 393206, 1, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 1, 0, 262157, 1, 0, 262158, 1, 0, 262159, 1, 0, 327695, 1, 0, 393231, 1, 0, 393230, 1, 0, 393229, 1, 0, 393228, 1, 0, 393227, 1, 0, 393226, 1, 0, 393225, 1, 0, 327694, 1, 0, 327693, 1, 0, 327692, 1, 0, 327691, 1, 0, 327690, 1, 0, 327689, 1, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_iailm")]
+position = Vector2(-88, -61)
+collision_mask = 2
+jump_height = 120.0
+jump_time_to_peak = 0.2
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+
+[connection signal="is_dead" from="Player" to="." method="_on_player_is_dead"]

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://doewh02l8gemh"]
+
+[node name="Inventory" type="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
